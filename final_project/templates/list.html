@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Horizontal rule for visual separation -->
+<hr>
+
+<!-- Row container for displaying product cards -->
+<div class="row">
+    <!-- Loop through each item in the object_list -->
+    {% for each in object_list %}
+    <div class="col">
+        <!-- Card to display product information -->
+        <div class="card" style="width: 13rem;">
+            <!-- Product image -->
+            <img src="{{ each.image_url }}" class="card-img-top" alt="Product image">
+            <div class="card-body">
+                <!-- Product title, truncated to 25 characters with ellipsis -->
+                <h5 class="card-title">{{ each.title|slice:":25"}} ...</h5>
+                <!-- Product price, formatted to 2 decimal places -->
+                <p class="card-text">${{ each.price|floatformat:2 }}</p>
+                <!-- Availability status -->
+                {% if each.product_available is True %}
+                <li class="text-primary">Available</li>
+                {% else %}
+                <li class="text-danger">Out of Stock !</li>
+                {% endif %}
+                <br>
+                <!-- Link to view product details -->
+                <a href="{% url 'detail' each.id %}" class="btn btn-primary">View</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

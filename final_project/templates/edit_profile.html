@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <!-- Page header -->
+  <h2>Edit Profile</h2>
+
+  <!-- Form for updating profile information -->
+  <form method="post">
+    {% csrf_token %}
+    <!-- Render user profile form fields -->
+    {{ user_form.as_p }}
+    
+    <!-- Section for changing password -->
+    <h3>Change Password</h3>
+    {{ password_form.as_p }}
+    
+    <!-- Submit button -->
+    <button type="submit">Save changes</button>
+  </form>
+{% endblock %}

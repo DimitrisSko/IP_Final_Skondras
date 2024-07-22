@@ -1,0 +1,109 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags for character set and responsive design -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Link to Bootstrap CSS for styling -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!-- Link to custom CSS file -->
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+  <!-- Inline CSS to set the background color of the body -->
+  <style>
+    body {
+      background-color: rgba(124, 225, 250, 0.497)!important;
+    }
+  </style>
+  
+  <!-- Title of the webpage -->
+  <title>Final Project</title>
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-dark bg-dark">
+    <!-- Brand link in the navigation bar -->
+    <a class="navbar-brand" href="{% url 'list' %}">Final Project</a>
+    
+    <!-- User menu with dropdown options -->
+    <div class="btn-group dropright">
+      <!-- Dropdown toggle button displaying the current user -->
+      <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{user}}
+      </a>
+
+      <!-- Dropdown menu items -->
+      <div class="dropdown-menu">
+        {% if user.is_authenticated %}
+          <!-- Logout form if the user is authenticated -->
+          <form id="logout-form" method="POST" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit">Logout</button>
+          </form>
+          <!-- Admin and profile links based on user role -->
+          {% if user.is_staff %}
+            <a href="{% url 'admin:index' %}">Admin Page</a>
+          {% else %}
+            <a href="{% url 'edit_profile' %}">Edit Profile</a>
+          {% endif %}
+        {% else %}
+          <!-- Login and signup links if the user is not authenticated -->
+          <a class="dropdown-item text-secondary" href="{% url 'login' %}">Log In</a>
+          <a class="dropdown-item text-secondary" href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+        </div>
+    </div>
+
+    <!-- Spacer for layout adjustment -->
+    <div class="mx-auto" style="width: 10px;">
+    </div>
+
+    <!-- Search form -->
+    <form class="search" action="{% url 'search_results' %}" method="get">
+      <!-- Search icon image -->
+      <img src="https://cdn.pixabay.com/photo/2017/01/13/01/22/magnifying-glass-1976105_1280.png" class="card-img-top" alt="...">
+      <!-- Font Awesome script for icons -->
+      <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+      <!-- Link to custom CSS file -->
+      <link rel="stylesheet" href="{% static 'css/base.css' %}">
+      <!-- Search input field with Font Awesome icon -->
+      <i class="fas fa-search"></i>
+      <input name="q" class="fas fa-search" type="text" autocomplete="off" placeholder="click to search">
+    </form>
+
+  </nav>
+  <br>
+
+  <!-- Main content container -->
+  <div class='container'>
+    {% block content %}
+    {% endblock content %}
+  </div>
+
+  <!-- Footer section -->
+  <footer style="background-color: #343a40; color: white; padding: 20px; text-align: center;">
+    <!-- Footer content -->
+    <p>&copy; 2024 My Bookstore. All rights reserved.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Privacy_policy">Privacy Policy</a> | <a href="https://en.wikipedia.org/wiki/Terms_of_service#:~:text=Terms%20of%20service%20(also%20known,wants%20to%20use%20that%20service.">Terms of Service</a></p>
+  </footer>
+
+  <!-- JavaScript libraries: jQuery, Popper.js, and Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

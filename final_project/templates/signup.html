@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock title%}
+
+{% block content %}
+
+<!-- Sign up page header -->
+<h2>Sign up</h2>
+
+<!-- Form for user registration -->
+<form method="post">
+
+    <!-- CSRF token for security -->
+    {% csrf_token %}
+    
+    <!-- Render the form fields -->
+    {{ form.as_p }}
+    
+    <!-- Submit button for the form -->
+    <button type="submit" class="btn btn-success">Sign up</button>
+</form>
+
+{% endblock content %}

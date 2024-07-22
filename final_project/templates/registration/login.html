@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Log In{% endblock title %}
+
+{% block content %}
+
+<!-- Log In page header -->
+<h3>Log In</h3>
+
+<!-- Form for user login -->
+<form method="post">
+    <!-- CSRF token for security -->
+    {% csrf_token %}
+    
+    <!-- Render the login form fields -->
+    {{ form.as_p }}
+    
+    <!-- Submit button to log in -->
+    <button type="submit" class="btn btn-success">Log In</button>
+    
+    <!-- Link to the sign-up page for new users -->
+    <a class="btn btn-outline-info" href="{% url 'signup' %}" role="button">Create Account</a>    
+</form>
+
+{% endblock content %}
